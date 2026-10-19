@@ -8,7 +8,7 @@ Identity cards, licenses and badges for Qbox, with an in-game card designer.
 * `/idcards` opens the card designer for admins: lay out text, data fields, the mugshot, images and shapes per item
 * Designs are stored in the database and apply instantly, no restart needed
 * The UI follows your ox_lib theme through the `ox:primaryColor` and `ox:primaryShade` convars
-* A mugshot is taken on first use and saved in the item metadata
+* A mugshot is taken on first use and saved in the item metadata, optionally uploaded to a CDN
 
 ## Dependencies
 * [ox_lib](https://github.com/overextended/ox_lib)
@@ -54,6 +54,13 @@ Add the following to your `ox_inventory/data/items.lua`. Any other item can be t
 * Shortcuts: `Ctrl+Z` / `Ctrl+Y` undo and redo, `Ctrl+D` duplicate, `Delete` remove, arrow keys nudge (`Shift` for 10px), `Ctrl+S` save. Hold `Shift` while dragging to skip snapping.
 
 Images can be `https://` links or files placed in `web/public` (for example `badges/examplebadge.png`), which requires rebuilding the UI.
+
+## Mugshot uploads
+Mugshots are stored in the item metadata as base64 by default. Set `imageUpload` in `config/server.lua` with an API key to upload them to a CDN instead, so the metadata only holds the image url.
+
+* Providers: `qbox`, `fivemanage`, `fivemerr` or `custom` (your own `url`, form `field` and `responsePath` to the url in the json response)
+* Cards that already hold a base64 mugshot are uploaded and switched to the url the next time they are used
+* If an upload fails the base64 mugshot is kept, so cards keep working
 
 ## Commands
 * `/idcards` open the card designer

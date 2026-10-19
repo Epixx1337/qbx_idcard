@@ -1,15 +1,29 @@
 local sharedConfig = require 'config.shared'
 local templates = require 'server.templates'
+local upload = require 'server.upload'
 
 local ox_inventory = exports.ox_inventory
 local MAX_MUGSHOT_LENGTH = 512 * 1024
 
 ---@param mugShot any
 ---@return boolean
-local function isValidMugShot(mugShot)
+local function isBase64MugShot(mugShot)
     return type(mugShot) == 'string'
         and #mugShot <= MAX_MUGSHOT_LENGTH
         and mugShot:find('^data:image/[%w.+-]+;base64,') ~= nil
+end
+
+---@param mugShot any
+---@return boolean
+local function isValidMugShot(mugShot)
+    if isBase64MugShot(mugShot) then return true end
+    return type(mugShot) == 'string' and #mugShot <= 512 and mugShot:find('^https://[^%s"\'()\\<>]+$') ~= nil
+end
+
+---@param citizenid string
+---@return string
+local function mugShotName(citizenid)
+    return ('mugshot_%s_%d'):format(citizenid, os.time())
 end
 
 ---@param sex number
@@ -95,23 +109,35 @@ exports('GetMetaLicense', GetMetaLicense)
 
 ---@param src number
 ---@param itemName string
----@param slot? number
+---@param slot number
+---@param mugShot string
 ---@return table?
-local function saveMugShot(src, itemName, slot)
-    local mugShot = lib.callback.await('um-idcard:client:callBack:getMugShot', src)
-    if not isValidMugShot(mugShot) then return end
-
-    local inventoryItem = slot and ox_inventory:GetSlot(src, slot)
-    if not inventoryItem or inventoryItem.name ~= itemName then
-        local _, found = next(ox_inventory:Search(src, 1, itemName) or {})
-        inventoryItem = found and ox_inventory:GetSlot(src, found.slot)
-    end
+local function setMugShot(src, itemName, slot, mugShot)
+    local inventoryItem = ox_inventory:GetSlot(src, slot)
     if not inventoryItem or inventoryItem.name ~= itemName then return end
 
     local metadata = inventoryItem.metadata or {}
     metadata.mugShot = mugShot
-    ox_inventory:SetMetadata(src, inventoryItem.slot, metadata)
+    ox_inventory:SetMetadata(src, slot, metadata)
     return metadata
+end
+
+---@param src number
+---@param itemName string
+---@param citizenid string
+---@param slot? number
+---@return table?
+local function saveMugShot(src, itemName, citizenid, slot)
+    local mugShot = lib.callback.await('um-idcard:client:callBack:getMugShot', src)
+    if not isBase64MugShot(mugShot) then return end
+
+    if not slot or ox_inventory:GetSlot(src, slot)?.name ~= itemName then
+        local _, found = next(ox_inventory:Search(src, 1, itemName) or {})
+        slot = found and found.slot
+    end
+    if not slot then return end
+
+    return setMugShot(src, itemName, slot, upload.image(mugShot, mugShotName(citizenid)) or mugShot)
 end
 
 ---@param src number
@@ -146,8 +172,12 @@ local function sendData(src, itemName, metadata, slot)
         return exports.qbx_core:Notify(src, locale('error.not_authorized'), 'error')
     end
 
-    if not isValidMugShot(metadata.mugShot) and (not metadata.citizenid or metadata.citizenid == player.PlayerData.citizenid) then
-        metadata = saveMugShot(src, itemName, slot) or metadata
+    local citizenid = player.PlayerData.citizenid
+    if isBase64MugShot(metadata.mugShot) and slot and upload.enabled() then
+        local url = upload.image(metadata.mugShot, mugShotName(metadata.citizenid or citizenid))
+        if url then metadata = setMugShot(src, itemName, slot, url) or metadata end
+    elseif not isValidMugShot(metadata.mugShot) and (not metadata.citizenid or metadata.citizenid == citizenid) then
+        metadata = saveMugShot(src, itemName, citizenid, slot) or metadata
     end
 
     local charinfo = player.PlayerData.charinfo

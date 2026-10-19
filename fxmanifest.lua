@@ -1,6 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
+node_version '22'
 
 name 'qbx_idcard'
 author 'uyuyorum {um}'
@@ -29,6 +30,7 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
+    'server/upload.js',
 }
 
 ui_page 'web/build/index.html'
