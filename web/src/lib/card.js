@@ -81,7 +81,7 @@ function classicCard(license, label) {
     jobs: license.jobs,
     elements: [
       text({ text: t('preset.state'), x: 20, y: 14, w: 200, h: 24, size: 15, weight: 700, spacing: 2, uppercase: true }),
-      field({ field: 'cardtype', x: 190, y: 16, w: 158, h: 20, size: 12, weight: 500, spacing: 1.5, align: 'right', color: '#373a40' }),
+      field({ field: 'cardtype', x: 160, y: 16, w: 172, h: 20, size: 12, weight: 500, spacing: 1.5, align: 'right', color: '#373a40' }),
       photo({ x: 24, y: 60, w: 112, h: 136, radius: 8, borderWidth: 1, borderColor: '#00000030' }),
       field({ ...value, field: 'lastname', label: t('field.lastname'), x: 156, y: 58, w: 252 }),
       field({ ...value, field: 'firstname', label: t('field.firstname'), x: 156, y: 92, w: 252 }),

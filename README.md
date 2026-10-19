@@ -2,6 +2,13 @@
 
 Identity cards, licenses and badges for Qbox, with an in-game card designer.
 
+![The card designer](docs/media/designer-overview.png)
+
+<p align="center">
+<img width="49%" src="docs/media/viewer-card.png">
+<img width="49%" src="docs/media/viewer-badge.png">
+</p>
+
 ## Features
 * Use a card item to hold it in your hand and show it to the closest player, or yourself if nobody is near
 * Badges are held as a badge prop and can be limited to jobs, so only police can flash a police badge
@@ -45,6 +52,8 @@ Add the following to your `ox_inventory/data/items.lua`. Any other item can be t
 ```
 
 ## Designer
+![A custom weapon permit built from a blank card](docs/media/designer-custom-card.png)
+
 * `/idcards` (`group.admin` by default, see `config/shared.lua`) opens the designer
 * Cards listed in `config/shared.lua` show their default design until you save a custom one, **Reset** returns to the default
 * **New card** turns any inventory item into a card, starting from the ID card, badge wallet or a blank preset
@@ -55,12 +64,16 @@ Add the following to your `ox_inventory/data/items.lua`. Any other item can be t
 
 Images can be `https://` links or files placed in `web/public` (for example `badges/examplebadge.png`), which requires rebuilding the UI.
 
+The full walkthrough is in [docs/designer.md](docs/designer.md), badges in [docs/badges.md](docs/badges.md).
+
 ## Mugshot uploads
 Mugshots are stored in the item metadata as base64 by default. Set `imageUpload` in `config/server.lua` with an API key to upload them to a CDN instead, so the metadata only holds the image url.
 
 * Providers: `qbox`, `fivemanage`, `fivemerr` or `custom` (your own `url`, form `field` and `responsePath` to the url in the json response)
 * Cards that already hold a base64 mugshot are uploaded and switched to the url the next time they are used
 * If an upload fails the base64 mugshot is kept, so cards keep working
+
+See [docs/cdn.md](docs/cdn.md) for the details.
 
 ## Commands
 * `/idcards` open the card designer
