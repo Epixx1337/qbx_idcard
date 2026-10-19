@@ -1,0 +1,161 @@
+{
+    "keybind": {
+        "close": "Close ID card"
+    },
+    "command": {
+        "designer": "Open the ID card designer (Admin Only)",
+        "give": "Give a player an ID card, license or badge (Admin Only)",
+        "give_target": "Player ID",
+        "give_item": "Card item name"
+    },
+    "error": {
+        "not_authorized": "You are not authorized to use this",
+        "save_failed": "The design could not be saved",
+        "unknown_card": "That item is not a card"
+    },
+    "success": {
+        "showing": "You are showing your card to the closest player",
+        "saved": "Card design saved",
+        "deleted": "Card design removed",
+        "given": "Card issued"
+    },
+    "metadata": {
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "nationality": "Nationality",
+        "birthdate": "Birthdate",
+        "citizenid": "eID"
+    },
+    "ui": {
+        "close": "Close",
+        "designer": "Card Designer",
+        "designer_hint": "Select a card on the left or create a new one",
+        "give": "Give to me",
+        "delete": "Delete",
+        "reset": "Reset",
+        "save": "Save",
+        "undo": "Undo (Ctrl+Z)",
+        "redo": "Redo (Ctrl+Y)",
+        "forward": "Bring forward",
+        "backward": "Send backward",
+        "duplicate": "Duplicate (Ctrl+D)",
+        "remove": "Remove (Del)",
+        "snap": "Snap to guides (hold Shift to move freely)",
+        "search": "Search cards",
+        "missing_item": "This item does not exist in ox_inventory",
+        "custom": "Custom",
+        "draft": "Draft",
+        "default": "Default",
+        "item": "Item",
+        "choose_item": "Choose an item",
+        "preset_label": "Start from",
+        "cancel": "Cancel",
+        "create": "Create",
+        "new_card": "New card",
+        "preview_hand": "Preview in hand",
+        "no_selection": "Select an element on the card to edit it",
+        "no_layers": "This card has no elements yet",
+        "preset": {
+            "card": "ID card",
+            "badge": "Badge wallet",
+            "blank": "Blank card",
+            "text": "Text",
+            "state": "Los Santos"
+        },
+        "confirm": {
+            "title": "Are you sure?",
+            "ok": "Continue",
+            "discard": "You have unsaved changes on this card. Discard them?",
+            "close": "You have unsaved changes. Close the designer anyway?",
+            "reset": "Reset %s back to its default design?",
+            "delete": "Delete the design for %s? The item stops working as a card."
+        },
+        "tab": {
+            "element": "Element",
+            "layers": "Layers",
+            "card": "Card"
+        },
+        "element": {
+            "text": "Text",
+            "field": "Field",
+            "photo": "Photo",
+            "image": "Image",
+            "rect": "Shape"
+        },
+        "field": {
+            "fullname": "Full name",
+            "firstname": "First name",
+            "lastname": "Last name",
+            "birthdate": "Date of birth",
+            "sex": "Sex",
+            "nationality": "Nationality",
+            "citizenid": "Citizen ID",
+            "cardtype": "Card name",
+            "job": "Job",
+            "grade": "Job grade",
+            "callsign": "Callsign",
+            "issued": "Issued on",
+            "officer": "Officer"
+        },
+        "section": {
+            "typography": "Typography",
+            "frame": "Frame",
+            "layout": "Layout",
+            "card": "Card",
+            "background": "Background",
+            "handheld": "In hand",
+            "access": "Access"
+        },
+        "prop": {
+            "text": "Text",
+            "field": "Shows",
+            "label": "Caption",
+            "label_hint": "Optional caption above the value",
+            "label_size": "Caption size",
+            "label_color": "Caption color",
+            "src": "Image",
+            "src_hint": "https:// link or a file in web/public, like badges/examplebadge.png",
+            "fit": "Fit",
+            "grayscale": "Black and white",
+            "fill": "Fill",
+            "font": "Font",
+            "weight": "Weight",
+            "size": "Size",
+            "spacing": "Spacing",
+            "color": "Color",
+            "uppercase": "Uppercase",
+            "italic": "Italic",
+            "radius": "Corner radius",
+            "border": "Border",
+            "border_color": "Border color",
+            "width": "Width",
+            "height": "Height",
+            "rotate": "Rotation",
+            "opacity": "Opacity",
+            "name": "Card name",
+            "name_hint": "Shown by fields set to Card name",
+            "kind": "Type",
+            "image": "Image",
+            "prop": "Prop model",
+            "custom_offset": "Custom hand position",
+            "jobs": "Jobs",
+            "jobs_hint": "Comma separated. Only these jobs can show the card, leave empty for everyone"
+        },
+        "kind": {
+            "card": "Card",
+            "badge": "Badge"
+        },
+        "fit": {
+            "contain": "Contain",
+            "cover": "Cover",
+            "fill": "Stretch"
+        },
+        "font": {
+            "roboto": "Roboto",
+            "mono": "Monospace",
+            "slab": "Slab serif",
+            "oswald": "Condensed",
+            "signature": "Signature"
+        }
+    }
+}

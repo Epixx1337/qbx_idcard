@@ -6,35 +6,36 @@ name 'qbx_idcard'
 author 'uyuyorum {um}'
 version '1.0.0'
 license 'GPL-3.0 license'
-repository 'https://github.com/alp1x/um-idcard'
-description 'FiveM Identity Card for QBox'
+repository 'https://github.com/Qbox-project/qbx_idcard'
+description 'Identity cards, licenses and badges with an in-game card designer for Qbox'
+
+ox_lib 'locale'
 
 dependencies {
-	'ox_lib',
-	'MugShotBase64'
+    'ox_lib',
+    'oxmysql',
+    'qbx_core',
+    'ox_inventory',
+    'MugShotBase64'
 }
 
-shared_scripts {
-	'@ox_lib/init.lua',
-	'config/shared.lua'
-}
+shared_script '@ox_lib/init.lua'
 
-client_script 'main/client.lua'
+client_scripts {
+    'client/main.lua',
+    'client/designer.lua',
+}
 
 server_scripts {
-	'@oxmysql/lib/MySQL.lua',
-	'bridge/**/*.lua',
-	'main/server.lua',
-	'main/version.lua',
+    '@oxmysql/lib/MySQL.lua',
+    'server/main.lua',
 }
 
-ui_page 'web/index.html'
+ui_page 'web/build/index.html'
 
 files {
-	'web/index.html',
-	'web/css/style.css',
-	'web/flags/*.png',
-	'lang/global.js',
-	'web/js/*.js',
-	'web/badges/*.png',
+    'config/shared.lua',
+    'locales/*.json',
+    'web/build/index.html',
+    'web/build/**/*',
 }
